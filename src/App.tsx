@@ -1,11 +1,21 @@
-import React, { Suspense, useState } from 'react'
-import { Interactive, XR, VRButton, Controllers } from '@react-three/xr'
-import { Text } from '@react-three/drei'
-import './style.css'
+import React, { useState } from 'react'
+import { createRoot } from 'react-dom/client'
+import { Interactive, XR, Controllers, VRButton } from '@react-three/xr'
+import { Sky, Text } from '@react-three/drei'
+import '@react-three/fiber'
+import './styles.css'
 import { Canvas } from '@react-three/fiber'
-import Webcam from "react-webcam";
+
+function Floor() {
+  return (
+    <mesh rotation={[-Math.PI / 2, 0, 0]}>
+      <planeGeometry args={[40, 40]} />
+      <meshStandardMaterial color="#666" />
+    </mesh>
+  )
+}
+
 function Box({ color, size, scale, children, ...rest }: any) {
-  
   return (
     <mesh scale={scale} {...rest}>
       <boxGeometry args={size} />
@@ -17,20 +27,18 @@ function Box({ color, size, scale, children, ...rest }: any) {
 
 function Button(props: any) {
   const [hover, setHover] = useState(false)
-  const [color, setColor] = useState<any>('blue')
+  const [color, setColor] = useState(0x123456)
 
   const onSelect = () => {
     setColor((Math.random() * 0xffffff) | 0)
   }
 
   return (
-    <Interactive onHover={() => setHover(true)} onBlur={() => setHover(false)} onSelect={onSelect}>
-      <Box color={color} scale={hover ? [0.6, 0.6, 0.6] : [0.5, 0.5, 0.5]} size={[0.4, 0.1, 0.1]} {...props}>
-        <Suspense fallback={null}>
-          <Text position={[0, 0, 0.06]} fontSize={0.05} color="#000" anchorX="center" anchorY="middle">
-            Hello react-xr!
-          </Text>
-        </Suspense>
+    <Interactive onSelect={onSelect} onHover={() => setHover(true)} onBlur={() => setHover(false)}>
+      <Box color={color} scale={hover ? [1.5, 1.5, 1.5] : [1, 1, 1]} size={[0.4, 0.1, 0.1]} {...props}>
+        <Text position={[0, 0, 0.06]} fontSize={0.05} color="#000" anchorX="center" anchorY="middle">
+          Hello react-xr!
+        </Text>
       </Box>
     </Interactive>
   )
@@ -40,20 +48,17 @@ export default function App() {
   return (
     <>
       <VRButton />
-      <Webcam videoConstraints={{
-    width: { min: 480 },
-    height: { min: 720 },
-    facingMode: { exact: "environment" }
-  }}/>
       <Canvas>
-        
-        <XR referenceSpace="local">
+        <XR>
+          <Sky sunPosition={[0, 1, 0]} />
+          <Floor />
           <ambientLight />
           <pointLight position={[10, 10, 10]} />
-          <Button position={[0, 0.1, -0.2]} />
           <Controllers />
+          <Button position={[0, 0.8, -1]} />
         </XR>
       </Canvas>
     </>
   )
 }
+

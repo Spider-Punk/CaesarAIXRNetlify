@@ -3,6 +3,5 @@ import React from 'react'
 import App  from './App'
 
 //@ts-ignore
-
 const root = createRoot(document.getElementById('root'))
 root.render(<App />)
