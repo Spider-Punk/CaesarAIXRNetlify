@@ -1,9 +1,9 @@
 import React, { Suspense, useState } from 'react'
-import { Interactive, XR, ARButton, Controllers } from '@react-three/xr'
+import { Interactive, XR, VRButton, Controllers } from '@react-three/xr'
 import { Text } from '@react-three/drei'
 import './style.css'
 import { Canvas } from '@react-three/fiber'
-
+import Webcam from "react-webcam";
 function Box({ color, size, scale, children, ...rest }: any) {
   
   return (
@@ -39,8 +39,14 @@ function Button(props: any) {
 export default function App() {
   return (
     <>
-      <ARButton />
+      <VRButton />
+      <Webcam videoConstraints={{
+    width: { min: 480 },
+    height: { min: 720 },
+    facingMode: { exact: "environment" }
+  }}/>
       <Canvas>
+        
         <XR referenceSpace="local">
           <ambientLight />
           <pointLight position={[10, 10, 10]} />
