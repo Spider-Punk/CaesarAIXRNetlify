@@ -4,7 +4,8 @@ import { Sky, Text } from '@react-three/drei'
 import '@react-three/fiber'
 import './style.css'
 import { Canvas } from '@react-three/fiber'
-
+import { useRef } from 'react'
+import { useFrame } from '@react-three/fiber'
 function Floor() {
   return (
     <mesh rotation={[-Math.PI / 2, 0, 0]}>
@@ -13,7 +14,28 @@ function Floor() {
     </mesh>
   )
 }
-
+function Sphere(props:any) {
+  const ref:any = useRef();
+  useFrame((state:any) => {
+    ref.current.position.set(
+      Math.sin(state.clock.getElapsedTime() / 1.5) / 2,
+      Math.cos(state.clock.getElapsedTime() / 1.5) / 2,
+      Math.cos(state.clock.getElapsedTime() / 1.5) / 2 + 0.5
+    );
+    ref.current.rotation.set(
+      Math.sin(state.clock.getElapsedTime() / 1.5) / 2 * 5,
+      Math.cos(state.clock.getElapsedTime() / 1.5) / 2,
+      Math.tan(state.clock.getElapsedTime() / 10.5) / 2
+    );
+  });
+  return (
+    <mesh ref={ref} {...props}>
+      <sphereGeometry args={[0.2, 30, 30]} />
+      <meshStandardMaterial color='hotpink' />
+    </mesh>
+  );
+}
+export
 function Box({ color, size, scale, children, ...rest }: any) {
   return (
     <mesh scale={scale} {...rest}>
@@ -23,6 +45,8 @@ function Box({ color, size, scale, children, ...rest }: any) {
     </mesh>
   )
 }
+
+
 
 function Button(props: any) {
   const [hover, setHover] = useState(false)
@@ -55,6 +79,7 @@ export default function App() {
           <pointLight position={[10, 10, 10]} />
           <Controllers />
           <Button position={[0, 0.8, -1]} />
+          <Sphere/>
         </XR>
       </Canvas>
     </>
