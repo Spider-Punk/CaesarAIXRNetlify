@@ -1,5 +1,5 @@
 import React, { Suspense, useState } from 'react'
-import { Interactive, XR, VRButton, Controllers } from '@react-three/xr'
+import { Interactive, XR, ARButton, Controllers } from '@react-three/xr'
 import { Text } from '@react-three/drei'
 import './style.css'
 import { Canvas } from '@react-three/fiber'
@@ -39,7 +39,7 @@ function Button(props: any) {
 export default function App() {
   return (
     <>
-      <VRButton />
+      <ARButton />
       <Canvas>
         <XR referenceSpace="local">
           <ambientLight />
