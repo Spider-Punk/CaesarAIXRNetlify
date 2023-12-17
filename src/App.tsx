@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import { createRoot } from 'react-dom/client'
+import  { useState } from 'react'
 import { Interactive, XR, Controllers, VRButton } from '@react-three/xr'
 import { Sky, Text } from '@react-three/drei'
 import '@react-three/fiber'
