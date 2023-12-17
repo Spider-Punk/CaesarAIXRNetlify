@@ -1,5 +1,5 @@
 import React, { Suspense, useState } from 'react'
-import { Interactive, XR, ARButton, Controllers ,VRButton} from '@react-three/xr'
+import { Interactive, XR, ARButton, Controllers } from '@react-three/xr'
 import { Text } from '@react-three/drei'
 import './style.css'
 import { Canvas } from '@react-three/fiber'
