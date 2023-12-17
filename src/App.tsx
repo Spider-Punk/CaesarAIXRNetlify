@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { Interactive, XR, Controllers, VRButton } from '@react-three/xr'
 import { Sky, Text } from '@react-three/drei'
 import '@react-three/fiber'
-import './styles.css'
+import './style.css'
 import { Canvas } from '@react-three/fiber'
 
 function Floor() {
