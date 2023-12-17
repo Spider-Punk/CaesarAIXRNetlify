@@ -26,7 +26,7 @@ function Box({ color, size, scale, children, ...rest }: any) {
 
 function Button(props: any) {
   const [hover, setHover] = useState(false)
-  const [color, setColor] = useState(0x123456)
+  const [color, setColor] = useState(0x123456);
 
   const onSelect = () => {
     setColor((Math.random() * 0xffffff) | 0)
