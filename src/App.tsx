@@ -39,7 +39,7 @@ function Button(props: any) {
 export default function App() {
   return (
     <>
-      <VRButton />
+      <ARButton />
       <Canvas>
         <XR referenceSpace="local">
           <ambientLight />
